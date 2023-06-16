@@ -1,3 +1,9 @@
+const ejs = require('ejs')
+const express = require("express");
+const app = express();
+app.use(express.static("public"));
+app.set('view engine', 'ejs');
+
 const { v4: uuidv4 } = require("uuid");
 
 const User = require("../models/user.model");
@@ -20,15 +26,33 @@ const getOneUser = async (req, res) => {
   }
 };
 
+
+
+// app.post("/register", function (req,res){
+//   const newUser = new User ({
+//     email: req.body.username,
+//     password: req.body.password
+//   });
+//   newUser.save (function(err){
+//     if (err){
+//       console.log(err);
+
+//     }
+//     else{
+//       res.render("secret");
+//     }
+//   })
+// })
+
 const createUser = async (req, res) => {
   try {
     const newUser = new User({
       id: uuidv4(),
-      name: req.body.name,
-      age: Number(req.body.age),
+      email: req.body.username,
+      password:req.body.password
     });
     await newUser.save();
-    res.status(201).json(newUser);
+    res.render("secret");
   } catch (error) {
     res.status(500).send(error.message);
   }
