@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const config = require("./config");
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const dbURL = config.db.url;
 
